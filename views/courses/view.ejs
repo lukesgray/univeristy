@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=course.subject%></title>
+</head>
+<body>
+    <h1><%=course.subject%></h1>
+    <a href="/courses/index">All Courses</a>
+    <div>
+        <a href="/courses/edit/<%=course._id%>">Edit: <%=course.subject%></a>
+    </div>
+    <form action="/courses/delete/<%=course._id%>?_method=DELETE" method="POST">
+        <button>Delete <%=course.subject%></button>
+    </form>
+    <div>
+        <% if (course.teacher) { %> 
+        <div>Instructor: <a href="/teachers/view/<%=course.teacher.id%>"><%=course.teacher.name%></a></div>
+        <% } else { %>
+        <div>No Instructor</div>
+        <% } %>  
+    </div>
+    <div>
+        <% if (course.students.length) { %> 
+            <h2>Students:</h2>
+            <% for(let student of course.students) { %> 
+            <div><a href="/students/view/<%=student.id%>"><%=student.name%></a></div>
+            <% } %> 
+        <% } else { %>
+        <div>No Students Currently Enrolled</div>
+        <% } %>  
+    </div>
+
+
+
+</body>
+</html>

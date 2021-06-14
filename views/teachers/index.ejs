@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty and Staff</title>
+</head>
+
+<body>
+    <h1>Faculty and Staff</h1>
+    <a href="/main">Main</a>
+    <a href="/teachers/new">Add a Faculty Member</a>
+    <ul>
+        <% for(let teacher of teachers) { %>
+            <li><a href="/teachers/view/<%=teacher.id%>"><%=teacher.name%></a></li>
+        <% } %>
+    </ul>
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=teacher.name%> Edit Form</title>
+</head>
+<body>
+    <h1>Edit <%=teacher.name%> </h1>
+    <form action="/teachers/edit/<%=teacher._id%>?_method=PUT" method="POST">
+        <div>
+            <label for="teacher">Change Instructor Name</label>
+            <input type="text" name="name" id="teacher" value="<%=teacher.name%>">
+        </div>
+        <div>
+            <label for="age">Change Instructor Age</label>
+            <input type="number" name="age" id="age" value="<%=teacher.age%>">
+        </div>
+        <button>Update</button>
+    </form>
+    <div><a href="/teachers/view/<%=teacher._id%>">Back</a></div>
+</body>
+</html>

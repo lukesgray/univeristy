@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=teacher.name%></title>
+</head>
+<body>
+    <h1><%=teacher.name%> - <%=teacher.age%></h1>
+    <div>
+        <a href="/teachers/index">Faculty</a> <a href="/teachers/edit/<%=teacher._id%>">Edit: <%=teacher.name%></a>
+        <% if(emptyCourses.length) { %> 
+            <form action="/teachers/addcourse/<%=teacher._id%>?_method=PUT" method="POST">
+                <select name="course" id="emptyCourses">
+                    <% for(course of emptyCourses) { %> 
+                        <option value="<%=course._id%>"><%=course.subject%></option>
+                    <% } %> 
+                </select>
+                <button>Add</button>
+            </form>
+        <% } %> 
+    </div>
+    <div>
+        <% if(teacher.courses.length) { %> 
+            <h2>Courses Taught:</h2>
+            <div>
+                <ul>
+                    <% for(let course of courses) { %>
+                        <li><a href="/courses/view/<%=course.id%>"><%=course.subject%></a></li> 
+                        <form action="/teachers/removecourse/<%=teacher._id%>?_method=PUT" method="POST">
+                            <input type="hidden" name="course" value="<%=course._id%>">
+                            <button>Remove</button>
+                        </form>
+                    <% } %>
+                </ul>
+            </div>
+        <% } %> 
+    </div>
+    <div>
+        <% if(teacher.courses.length) { %>
+            <h2>Students:</h2>
+            <div>
+                <ul>
+                    <% for(let student of students) { %>
+                        <li>
+                            <a href="/students/view/<%=student._id%>"><%=student.name%></a>
+                            <ul>
+                                <li>
+                                    <% for(let course of student.courses) { %>
+                                        <a href="/courses/view/<%=course._id%>"><%=course.subject%></a>
+                                    <% } %> 
+                                </li>
+                            </ul>
+                        </li> 
+                    <% } %>
+                </ul>
+            </div>
+        <% } %>
+    </div>
+    <div>
+        <form action="/teachers/delete/<%=teacher._id%>?_method=DELETE" method="POST">
+            <button>Remove <%=teacher.name%></button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students</title>
+</head>
+
+<body>
+    <h1>Students</h1>
+    <a href="/main">Main</a>
+    <h2>Enroll New Student:</h2>
+    <form action="/students/new" method="POST">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name">
+        </div>
+        <div>
+            <label for="age">Age</label>
+            <input type="number" name="age" id="age">
+        </div>
+        <button>Enroll</button>
+    </form>
+    <% if(students.length) { %> 
+        <h2>Students:</h2>
+        <ul>
+            <% for(let student of students) { %>
+            <li>
+                <a href="/students/view/<%=student._id%> "><%=student.name%></a>
+            </li>
+            <% } %>
+        </ul>
+    <% } %> 
+</body>
+
+</html>

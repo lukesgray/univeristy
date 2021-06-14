@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= course.subject %> Edit Form</title>
+</head>
+<body>
+    <h1>Edit: <%= course.subject %> </h1>
+    <a href="/courses/view/<%=course._id%>">Back</a>
+
+    <form action="/courses/edit/<%=course._id%>?_method=PUT" method="POST">
+        <div>
+            <label for="subject">Change Subject</label>
+            <input type="text" name="subject" id="subject" value="<%=course.subject%>">
+        </div>
+        <div>
+            <label for="teachers">Change Instructor</label>
+            <select name="teacher" id="teachers">
+                <option value="">No Instructor</option>
+                <% for(let teacher of teachers) { %>
+                    <option value="<%=teacher.id%>" <%=course.teacher && course.teacher.id === teacher.id ? 'selected' : ''%>><%= teacher.name %></option>
+                <% } %>
+            </select>
+        </div>
+        <div>
+            <% if (course.teacher) { %> 
+            <input type="hidden" name="oldTeacher" value="<%=course.teacher._id%>">
+            <% } %> 
+
+        </div>
+        <button>Update</button>
+    </form>
+    
+</body>
+</html>

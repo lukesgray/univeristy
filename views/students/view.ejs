@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=student.name%></title>
+</head>
+
+<body>
+    <h1><%=student.name%> - <%=student.age%></h1>
+    <div>
+        <a href="/students/index">Students</a> <a href="/students/edit/<%=student._id%> ">Edit <%=student.name%></a>
+        <% if (leftCourses.length) { %> 
+            <form action="/students/addcourse/<%=student._id%>?_method=PUT" method="POST">
+                <select name="course" id="leftCourses">
+                    <% for(let course of leftCourses) { %> 
+                        <option value="<%=course._id%>" name="<%=course%>"><%=course.subject%></option>
+                    <% } %> 
+                </select>
+                <button>Add</button>
+            </form>
+        <% } else { %>
+            <h2>No Courses Available</h2>
+        <% } %>  
+    </div>
+    <div>
+        <% if(student.courses.length) { %> 
+        <h2><%=student.name%> is Enrolled In:</h2>
+        <ul>
+            <% for(let course of courses) { %> 
+                <li><a href="/courses/view/<%=course._id%> "><%= course.subject %></a></li>
+                <form action="/students/removecourse/<%=student._id%>?_method=PUT" method="POST"">
+                    <input type="hidden" name="course" value="<%=course._id%>">
+                    <button>Remove</button>
+                </form>
+            <% } %> 
+        </ul> 
+        <% } %> 
+    </div>
+    <div>
+        <% if(teachers.length) { %>
+            <h2><%=student.name%>'s Professors Are:</h2>
+            <ul>
+                <% for(let teacher of teachers) { %>
+                    <li><a href="/teachers/view/<%=teacher._id%> "><%=teacher.name%></a></li>
+                <% } %>
+            </ul>
+        <% } %>
+    </div>
+    <div>
+        <form action="/students/delete/<%=student._id%>?_method=DELETE" method="POST">
+            <button>Expel <%=student.name%> </button>
+        </form>
+    </div>
+</body>
+
+</html>

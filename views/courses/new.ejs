@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Course Form</title>
+</head>
+
+<body>
+    <h1>Create a New Course</h1>
+    <a href="/courses/index">Courses</a>
+    <form action="/courses/new" method="POST">
+        <div>
+            <label for="subject">Subject</label>
+            <input type="text" name="subject" id="subject">
+        </div>
+        <div>
+            <label for="teachers">Instructor</label>
+            <select name="teacher" id="teachers">
+                <option value="">No Instructor</option>
+                <% for(let teacher of teachers) { %>
+                <option value="<%=teacher.id%>"><%= teacher.name %></option>
+                <% } %>
+            </select>
+        </div>
+        <button>Add Course</button>
+    </form>
+</body>
+
+</html>
